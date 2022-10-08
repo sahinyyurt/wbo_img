@@ -28,42 +28,38 @@
     img.src = url;
   }
 
-
   function setImgUrl() {
     var input = document.createElement("input");
     input.type = "file";
     input.onchange = (e) => {
+      var loadingEl = document.getElementById("loadingMessage");
+      loadingEl.classList.remove("hidden");
       var file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("image", file);
 
-      var fileReader = new FileReader();
-
-      fileReader.onload = function (fileLoadedEvent) {
-        let srcData = fileLoadedEvent.target.result;
-     
-         const formData = new FormData();
-        formData.append( "image", file );
-
-        fetch('https://api.imgbb.com/1/upload?key=cfb7a7ac7e029a1277368e21fbc1c028', {
-            method: 'POST', // or 'PUT'
-            body:formData
-        })
+      fetch(
+        "https://api.imgbb.com/1/upload?key=cfb7a7ac7e029a1277368e21fbc1c028",
+        {
+          method: "POST", // or 'PUT'
+          body: formData,
+        }
+      )
         .then((response) => response.json())
-        .then(({data}) => {
-             getMeta(data.url, ({ w, h }) => {
-                Tools.drawAndSend(
-                    {
-                    src: data.url,
-                    w: w,
-                    h: h,
-                    id: "image-" + Math.random() * 10,
-                    },
-                    Tools.list.Image
-                );
-                });
-        })
-       
-      };
-      fileReader.readAsDataURL(file);
+        .then(({ data }) => {
+          getMeta(data.url, ({ w, h }) => {
+            Tools.drawAndSend(
+              {
+                src: data.url,
+                w: w,
+                h: h,
+                id: "image-" + Math.random() * 10,
+              },
+              Tools.list.Image
+            );
+            loadingEl.classList.add("hidden");
+          });
+        });
     };
     input.click();
   }
