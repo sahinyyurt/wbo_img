@@ -18,7 +18,7 @@
     "statsd-client": "^0.4.7"
   },
   "scripts": {
-    "start": "nodemon ./server/server.js",
+    "start": "node ./server/server.js",
     "test": "nightwatch tests && nightwatch tests --env jwt"
   },
   "main": "./server/server.js",
