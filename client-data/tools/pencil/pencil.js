@@ -234,6 +234,7 @@
 		//Creates a new line on the canvas, or update a line that already exists with new information
 		var line = svg.getElementById(lineData.id) || Tools.createSVGElement("path");
 		line.id = lineData.id;
+		line.setAttribute("fill", 'none');
 		//If some data is not provided, choose default value. The line may be updated later
 		line.setAttribute("stroke", lineData.color || "black");
 		line.setAttribute("stroke-width", lineData.size || 10);

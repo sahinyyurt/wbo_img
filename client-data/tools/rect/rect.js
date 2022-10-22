@@ -179,6 +179,7 @@
 			shape.setAttribute("stroke-dasharray", "10 10" || "10 10");
 		}
 		shape.setAttribute("opacity", Math.max(0.1, Math.min(1, data.opacity)) || 1);
+		shape.setAttribute("fill", 'none');
 		Tools.group.appendChild(shape);
 		return shape;
 	}
