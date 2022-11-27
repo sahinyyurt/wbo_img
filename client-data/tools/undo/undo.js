@@ -53,13 +53,13 @@
 	Tools.add({ //The new tool
 		"name": "Undo",
 		"icon": "🗑",
-		"iconHTML":"<i style='color: #39CCCC;margin-top:7px' class='fas fa-undo-alt'></i>",
+		"iconHTML":"<i style='margin-top:7px' class='fas fa-undo-alt'></i>",
 		"shortcuts": {
             "actions":[{"key":"shift-U","action":undo}]
         },
 		"listeners": {},
 		"draw": draw,
-		"isExtra":true,
+		// "isExtra":true,
 		"oneTouch":true,
 		"onstart":undo,
 		"mouseCursor": "crosshair",

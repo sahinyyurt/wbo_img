@@ -53,7 +53,7 @@
 	Tools.add({ //The new tool
 		"name": "Redo",
 		"icon": "🗑",
-		"iconHTML":"<i style='color: #3D9970;margin-top:7px' class='fas fa-redo-alt'></i>",
+		"iconHTML":"<i style='margin-top:7px' class='fas fa-redo-alt'></i>",
 		"shortcuts": {
             "actions":[{"key":"shift-R","action":redo}]
         },
@@ -61,7 +61,6 @@
 			"press": redo
 		},
 		"draw": draw,
-		"isExtra":true,
 		"oneTouch":true,
 		"onstart":redo,
 		"mouseCursor": "crosshair",
