@@ -162,13 +162,13 @@ function handleMsg(board, message, socket) {
 			var sockets = getConnectedSockets();
 			sockets.forEach(function(s,i) {
 				var batches = board.getAll();
-				s.emit('broadcast', {type:'sync', id: socket.id, _children: (batches[0] || []),_more:(batches.length>1),msgCount:board.getMsgCount(s.id)});
+				s.to(board.name).emit('broadcast', {type:'sync', id: socket.id, _children: (batches[0] || []),_more:(batches.length>1),msgCount:board.getMsgCount(s.id)});
 				for(var i = 1; i < batches.length; i++){
-					s.emit("broadcast", { _children: batches[i], subtype: 'sync', _more:(i!=batches.length-1),msgCount:board.getMsgCount(s.id)});
+					s.to(board.name).emit("broadcast", { _children: batches[i], subtype: 'sync', _more:(i!=batches.length-1),msgCount:board.getMsgCount(s.id)});
 				}
 			});
 		}else if(message.type == "clear"){
-			socket.emit("broadcast", {type: 'sync', id: socket.id,msgCount:board.getMsgCount(socket.id)});
+			socket.to(board.name).emit("broadcast", {type: 'sync', id: socket.id,msgCount:board.getMsgCount(socket.id)});
 		}
 		
 	}else{

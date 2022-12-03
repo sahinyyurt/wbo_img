@@ -75,7 +75,7 @@
 		Tools.drawAndSend({
 			'type': 'line',
 			'id': curLineId,
-			'color': (curPen.mode=="Pencil"?Tools.getColor():"white"),
+			'color': (curPen.mode == "Pencil" ? Tools.getColor() : "white"),
 			'size': Tools.getSize(),
 			'opacity': Tools.getOpacity()
 		});
@@ -275,6 +275,7 @@
 	Tools.add({ //The new tool
 		// "name": "Pencil",
 		 "icon": "✏",
+		"iconHTML":"<i id='edit-icon' style='margin-top:7px' class='fa fa-pencil'></i>",
 		"name": "Pencil",
 		"title":"Pencil",
 		"listeners": {
@@ -286,7 +287,7 @@
             "changeTool":"1"
         },
 		"draw": draw,
-		"toggle":toggle,
+		// "toggle":toggle,
 		"onstart":onStart,
 		"onquit":onQuit,
 		"mouseCursor": "crosshair",

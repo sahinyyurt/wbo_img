@@ -76,11 +76,20 @@ Tools.connect = function() {
     self.socket = null;
   }
 
-  this.socket = io.connect('https://brainwekwbo.herokuapp.com/', {
-	"reconnection" : true,
-	"reconnectionDelay": 100, //Make the xhr connections as fast as possible
-	"timeout": 1000 * 60 * 20 // Timeout after 20 minutes
-  });
+  var url = new URL(window.location);
+  var params = new URLSearchParams(url.search);
+
+  var socket_params = {
+	  "path": window.location.pathname.split("/boards/")[0] + "/socket.io",
+	  "reconnection": true,
+	  "reconnectionDelay": 100, //Make the xhr connections as fast as possible
+	  "timeout": 1000 * 60 * 20 // Timeout after 20 minutes
+  }
+  if(params.has("token")) {
+	  socket_params.query = "token=" + params.get("token");
+  }
+
+  this.socket = io.connect('', socket_params);
 
   this.socket.on( 'connect', function () {
     console.log( 'connected to server' );
@@ -658,7 +667,7 @@ function handleMessage(message) {
 	if(message.userCount)updateUserCount(message.userCount);
 	if(message.type == "sync"){
 		if(message.id == Tools.socket.id)Tools.acceptMsgs = true;
-		if (Tools.acceptMsgs)Tools.clearBoard(false);
+		if (Tools.acceptMsgs)Tools.clearBoard(true);
 	}
 	if (message.tool && Tools.acceptMsgs) messageForTool(message);
 	if (message._children && Tools.acceptMsgs){
