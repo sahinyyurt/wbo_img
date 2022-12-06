@@ -61,7 +61,7 @@
       height: 1080,
       svg: outerHTML.replace('+=""',""),
     }).then((pngUrl) => {
-      downloadContent(pngUrl, Tools.boardName + ".png");
+      if(pngUrl)downloadContent(pngUrl, Tools.boardName + ".png");
     });
   }
 
@@ -72,6 +72,7 @@
 
     const canvas = new OffscreenCanvas(width, height);
     const ctx = canvas.getContext("2d");
+    canvas.get
     ctx.fillStyle = 'red';
     ctx.fillRect(0,0,width, height);
     const v = await window.Canvg.Canvg.from(ctx, svg, preset);
@@ -80,6 +81,10 @@
     await v.render();
 
     const blob = await canvas.convertToBlob();
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(canvas.toDataURL("image/png"));
+      return false;
+    }
     const pngUrl = URL.createObjectURL(blob);
 
     return pngUrl;

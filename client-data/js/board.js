@@ -336,7 +336,12 @@ Tools.clearBoard = function(deleteMsgs){
 	var defs = document.getElementById("defs");
 	var cursorGroup = document.getElementById("cursors");
 	var rect1 = document.getElementById("rect_1");
+	var bc = Tools.createSVGElement("rect");
+	bc.setAttributeNS(null, "width", "100%");
+	bc.setAttributeNS(null, "height", "100%");
+	bc.setAttributeNS(null, "fill", "white");
 	Tools.svg.innerHTML="";
+	Tools.svg.appendChild(bc);
 	Tools.svg.appendChild(defs);
 	Tools.svg.appendChild(rect1);
 	Tools.svg.appendChild(cursorGroup);
