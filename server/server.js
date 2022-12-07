@@ -81,7 +81,6 @@ function handleRequest(request, response) {
 	var parsedUrl = url.parse(request.url, true);
 	var parts = parsedUrl.pathname.split('/');
 	if (parts[0] === '') parts.shift();
-
 	if (parts[0] === "boards") {
 		// "boards" refers to the root directory
 		if (parts.length === 1 && parsedUrl.query.board) {
@@ -89,7 +88,7 @@ function handleRequest(request, response) {
 			var headers = { Location: 'boards/' + encodeURIComponent(parsedUrl.query.board) };
 			response.writeHead(301, headers);
 			response.end();
-		} else if (parts.length === 2 && request.url.indexOf('.') === -1) {
+		} else if (parts.length === 2 && ['board.css','socket.io.js'].indexOf(parts[1]) === -1) {
 			// If there is no dot and no directory, parts[1] is the board name
 			boardTemplate.serve(request, response);
 		} else { // Else, it's a resource
