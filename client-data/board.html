@@ -35,9 +35,6 @@
 		$(document).ready(function(){
   			$('[data-toggle="tooltip"]').tooltip();   
 		});
-		document.addEventListener('touchmove', function (event) {
-  			if (event.scale !== 1) { event.preventDefault(); }
-		}, {passive: false} );
 	</script>
 	<div id="loadingMessage">Loading</div>
 	<div id="overlay"></div>
@@ -76,6 +73,7 @@
 			
 		</svg>
 	</div>
+	<canvas id="canvas-for-download" style="display: node;"></canvas>
 	<div class="window" id="calc-container" style="display:none">
 		<div id="calc-container-header">Calc
 			<button type="button" class="close window-button" id="close-calc" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -188,6 +186,8 @@
 	<script src="js/path-data-polyfill.js"></script>
 	<script src="js/minitpl.js"></script>
 	<script src="js/board.js"></script>
+	<script src="tools/zoom-in/zoom-in.js"></script>
+	<script src="tools/zoom-out/zoom-out.js"></script>
 	<script src="tools/pencil/pencil.js"></script>
 	<script src="tools/line/line.js"></script>
 	<script src="tools/rect/rect.js"></script>
@@ -234,8 +234,7 @@
 	<!-- <script src="tools/calculator/calculator.js"></script> -->
 	<!-- END CALCULATOR TOOL-->
 
-	<script src="tools/zoom-in/zoom-in.js"></script>
-	<script src="tools/zoom-out/zoom-out.js"></script>
+
 	<!-- <script src="tools/redo/redo.js"></script>
 	<script src="tools/undo/undo.js"></script> -->
 	<script src="js/canvascolor/canvascolor.min.js"></script>

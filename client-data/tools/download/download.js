@@ -69,10 +69,8 @@
   async function toPng(data) {
     const { width, height, svg } = data;
     const preset = window.Canvg.presets.offscreen();
-
-    const canvas = new OffscreenCanvas(width, height);
+    const canvas = document.getElementById('canvas-for-download');
     const ctx = canvas.getContext("2d");
-    canvas.get
     ctx.fillStyle = 'red';
     ctx.fillRect(0,0,width, height);
     const v = await window.Canvg.Canvg.from(ctx, svg, preset);
@@ -80,14 +78,15 @@
     // Render only first frame, ignoring animations and mouse.
     await v.render();
 
-    const blob = await canvas.convertToBlob();
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(canvas.toDataURL("image/png"));
+      window.ReactNativeWebView.postMessage(canvas.toDataURL("image/png",0.8));
       return false;
     }
-    const pngUrl = URL.createObjectURL(blob);
-
-    return pngUrl;
+    
+    canvas.toBlob((blob) => { 
+      if(blob) return URL.createObjectURL(blob);
+      else return false;
+     }, 'image/png', 0.8);
   }
 
   function downloadContent(url, filename) {
