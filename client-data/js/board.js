@@ -778,7 +778,7 @@ function updateDocumentTitle() {
 function resizeCanvas(m) {
 	//Enlarge the canvas whenever something is drawn near its border
 	var x = m.x | 0, y = m.y | 0
-	var MAX_BOARD_SIZE = 65536; // Maximum value for any x or y on the board
+	var MAX_BOARD_SIZE = 800; // Maximum value for any x or y on the board
 	if (x > Tools.svg.width.baseVal.value - 2000) {
 		Tools.svg.width.baseVal.value = Math.min(x + 2000, 1920);
 	}
@@ -1175,10 +1175,10 @@ Tools.i18n = (function i18n() {
 
 function resize_view(){
 	//Scale the canvas on load
-	var screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-	var screenHeight =  Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-	svgWidth = Tools.svg.width.baseVal.value = Math.max(screenWidth + 2000, screenWidth * 2.5);
-	svgHeight = Tools.svg.height.baseVal.value =  Math.max(screenHeight + 2000, screenHeight * 2.5);
+	var screenWidth = 1920
+	var screenHeight =  1080
+	svgWidth = Tools.svg.width.baseVal.value = screenWidth + 1000;
+	svgHeight = Tools.svg.height.baseVal.value =  screenHeight + 500;
 	Tools.svg.setAttributeNS(null, "viewBox", "0 0 " + svgWidth + " " + svgHeight);
 }
 
