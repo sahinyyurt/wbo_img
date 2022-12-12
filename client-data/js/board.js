@@ -686,7 +686,7 @@ function handleMessage(message) {
 		batchCall(handleMessage, message._children);
 	}
 }
-/*
+
 //Receive draw instructions from the server
 Tools.socket.on("broadcast", function (msg) {
 	handleMessage(msg).finally(function afterload() {
@@ -702,18 +702,17 @@ Tools.socket.on("broadcast", function (msg) {
 	});
 });
 
-Tools.socket.on("disconnect", function onDisconnection() {
-	Tools.socket = io.connect('', {
-	"reconnection" : true,
-    	"forceNew" : true,
-	"reconnectionDelay": 100, //Make the xhr connections as fast as possible
-	"timeout": 1000 * 60 * 20 // Timeout after 20 minutes
-	});
-	//Get the board as soon as the page is loaded
-	Tools.socket.emit("getboard", Tools.boardName);
-});
+// Tools.socket.on("disconnect", function onDisconnection() {
+// 	Tools.socket = io.connect('', {
+// 	"reconnection" : true,
+//     	"forceNew" : true,
+// 	"reconnectionDelay": 100, //Make the xhr connections as fast as possible
+// 	"timeout": 1000 * 60 * 20 // Timeout after 20 minutes
+// 	});
+// 	//Get the board as soon as the page is loaded
+// 	Tools.socket.emit("getboard", Tools.boardName);
+// });
 
-*/
 Tools.unreadMessagesCount = 0;
 Tools.newUnreadMessage = function () {
 	Tools.unreadMessagesCount++;

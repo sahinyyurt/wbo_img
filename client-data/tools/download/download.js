@@ -67,6 +67,8 @@
 
 
   async function toPng(data) {
+    return new Promise(async (resolve, reject)=> {
+
     const { width, height, svg } = data;
     const preset = window.Canvg.presets.offscreen();
     const canvas = document.getElementById('canvas-for-download');
@@ -80,13 +82,16 @@
 
     if (window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(canvas.toDataURL("image/png",0.8));
-      return false;
+      canvas.hidden = true;
+      return resolve(false);
     }
     
     canvas.toBlob((blob) => { 
-      if(blob) return URL.createObjectURL(blob);
-      else return false;
+      canvas.hidden = true;
+      if(blob) return resolve(URL.createObjectURL(blob));
+      else return  resolve(false);
      }, 'image/png', 0.8);
+    })
   }
 
   function downloadContent(url, filename) {
