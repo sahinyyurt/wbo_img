@@ -688,19 +688,19 @@ function handleMessage(message) {
 }
 
 //Receive draw instructions from the server
-Tools.socket.on("broadcast", function (msg) {
-	handleMessage(msg).finally(function afterload() {
-		var loadingEl = document.getElementById("loadingMessage");
-		loadingEl.classList.add("hidden");
-		if(msg.type=='sync'){
-			if(Tools.msgs.length>msg.msgCount){
-				for(var i = msg.msgCount;i<Tools.msgs.length;i++){
-					Tools.msgs[i].curTool.draw(Tools.msgs[i].msg, true);
-				}
-			}
-		}
-	});
-});
+// Tools.socket.on("broadcast", function (msg) {
+// 	handleMessage(msg).finally(function afterload() {
+// 		var loadingEl = document.getElementById("loadingMessage");
+// 		loadingEl.classList.add("hidden");
+// 		if(msg.type=='sync'){
+// 			if(Tools.msgs.length>msg.msgCount){
+// 				for(var i = msg.msgCount;i<Tools.msgs.length;i++){
+// 					Tools.msgs[i].curTool.draw(Tools.msgs[i].msg, true);
+// 				}
+// 			}
+// 		}
+// 	});
+// });
 
 // Tools.socket.on("disconnect", function onDisconnection() {
 // 	Tools.socket = io.connect('', {
