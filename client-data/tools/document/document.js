@@ -12,23 +12,42 @@ function onstart() {
     fileInput.accept = "image/*";
     fileInput.click();
     fileInput.addEventListener("change", function(){
+        const imageFile = fileInput.files[0];
         var reader = new FileReader();
-        reader.readAsDataURL(fileInput.files[0]);
+        reader.readAsDataURL(imageFile);
       
         reader.onload = function (e) {
             var image = new Image();
             image.src = e.target.result;
             image.onload = function () {
-    
+            var canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
             var uid = Tools.generateUID("doc"); // doc for document
+            let w = this.width;
+            let h = this.height;
+            if (w > h) {
+                if (w > 1028) {
+                    h = h * (768 / h);
+                    w = 1028;
+                }
+            } else {
+                if (h > 768) {
+                    w = w * (768 / h);
+                    h = 768;
+                }
+            }
+          
+            canvas.width = w;
+            canvas.height = h;
             // console.log(image.src.toString().length);
-            
+            ctx.drawImage(this, 0, 0,w, h);
+            var dataurl = canvas.toDataURL(imageFile.type);
             var msg = {
                 id: uid,
                 type:"doc",
-                src: image.src,
-                w: this.width || 300,
-                h: this.height || 300,
+                src: dataurl,
+                w: w || 300,
+                h: h || 300,
                 x: (100+document.documentElement.scrollLeft)/Tools.scale+10*imgCount,
                 y: (100+document.documentElement.scrollTop)/Tools.scale + 10*imgCount
                 //fileType: fileInput.files[0].type

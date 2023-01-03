@@ -17,8 +17,8 @@ function noFail(fn) {
 	}
 }
 
-function startIO(app) {
-	io = iolib(app);
+function startIO(app,opt) {
+	io = iolib(app,opt);
 	io.on('connection', noFail(socketConnection));
 	return io;
 }
