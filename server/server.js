@@ -29,7 +29,9 @@ if (parseFloat(process.versions.node) < MIN_NODE_VERSION) {
 		", wbo requires at least " + MIN_NODE_VERSION + " !!!");
 }
 
-var io = sockets.start(app);
+var io = sockets.start(app, {
+	maxHttpBufferSize: 1e8, pingTimeout: 60000
+});
 
 app.listen(config.PORT);
 log("server started", { port: config.PORT });
